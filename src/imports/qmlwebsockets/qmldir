@@ -1,0 +1,3 @@
+module Qt.WebSockets
+plugin declarative_qmlwebsockets
+typeinfo plugins.qmltypes
