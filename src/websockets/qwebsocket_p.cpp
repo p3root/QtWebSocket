@@ -444,6 +444,8 @@ void QWebSocketPrivate::open(const QUrl &url, bool mask)
 #if QT_VERSION >= QT_VERSION_CHECK(5, 0, 2)
                     connect(m_pSocket.data(), &QAbstractSocket::bytesWritten, q,
                             &QWebSocket::bytesWritten);
+#else
+                    connect(m_pSocket.data(), SIGNAL(bytesWritten(qint64)), q, SIGNAL(bytesWritten(qint64)));
 #endif
                     setSocketState(QAbstractSocket::ConnectingState);
 #ifndef QT_NO_NETWORKPROXY
