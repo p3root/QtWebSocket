@@ -191,6 +191,12 @@ private:
     void makeConnections(const QTcpSocket *pTcpSocket);
     void releaseConnections(const QTcpSocket *pTcpSocket);
 
+    void setAdditionalQueryString(QList<QPair<QString, QString> >);
+    const QList<QPair<QString, QString> > &addtionalQueryString() const;
+
+    void setAdditionalHeaders(QList<QPair<QString, QString> >);
+    const QList<QPair<QString, QString> > &addtionalHeaders() const;
+
     QByteArray getFrameHeader(QWebSocketProtocol::OpCode opCode, quint64 payloadLength,
                               quint32 maskingKey, bool lastFrame);
     QString calculateAcceptKey(const QByteArray &key) const;
@@ -233,6 +239,9 @@ private:
     QString m_closeReason;
 
     QTime m_pingTimer;
+
+    QList<QPair<QString, QString> > m_additionalHeaders;
+    QList<QPair<QString, QString> > m_additionalQueryString;
 
     QWebSocketDataProcessor m_dataProcessor;
     QWebSocketConfiguration m_configuration;

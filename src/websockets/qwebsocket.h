@@ -114,6 +114,12 @@ public:
     QWebSocketProtocol::CloseCode closeCode() const;
     QString closeReason() const;
 
+    const QList<QPair<QString, QString> > &additionalQueryString() const;
+    const QList<QPair<QString, QString> > &additionalHeaders() const;
+
+    void setAdditonalQueryString(QList<QPair<QString, QString> >);
+    void setAddtionalHeaders(QList<QPair<QString, QString> > );
+
     qint64 write(const char *message) Q_REQUIRED_RESULT;
     qint64 write(const char *message, qint64 maxSize) Q_REQUIRED_RESULT;
     qint64 write(const QString &message) Q_REQUIRED_RESULT;

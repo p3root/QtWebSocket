@@ -379,11 +379,23 @@ void QWebSocketPrivate::open(const QUrl &url, bool mask)
 
         for(int i = 0; i <url.queryItems().count(); i++)
         {
-            query += url.queryItems()[i].first + "="+url.queryItems()[i].second+"&";
+            query += url.queryItems()[i].first.toAscii() + "="+url.queryItems()[i].second.toAscii()+"&";
         }
+
+#endif
+        for(int i = 0; i < m_additionalQueryString.size(); i++)
+        {
+            QString first =  m_additionalQueryString.at(i).first;
+            QString second =  m_additionalQueryString.at(i).second;
+
+            query += first +"="+second.toAscii()+"&";
+        }
+
+#if QT_VERSION <= QT_VERSION_CHECK(5, 0, 2)
         if(query.length() > 0)
             query = query.remove(query.size()-1, 1);
 #endif
+
         setRequestUrl(url);
         QString resourceName = url.path();
         if (!isEmpty) {
@@ -632,6 +644,26 @@ void QWebSocketPrivate::releaseConnections(const QTcpSocket *pTcpSocket)
     if (Q_LIKELY(pTcpSocket))
         disconnect(pTcpSocket);
     disconnect(&m_dataProcessor);
+}
+
+void QWebSocketPrivate::setAdditionalQueryString(QList<QPair<QString, QString> > lst)
+{
+    m_additionalQueryString = lst;
+}
+
+const QList<QPair<QString, QString> > &QWebSocketPrivate::addtionalQueryString() const
+{
+    return m_additionalQueryString;
+}
+
+void QWebSocketPrivate::setAdditionalHeaders(QList<QPair<QString, QString> > lst)
+{
+    m_additionalHeaders = lst;
+}
+
+const QList<QPair<QString, QString> > &QWebSocketPrivate::addtionalHeaders() const
+{
+    return m_additionalHeaders;
 }
 
 /*!
@@ -1162,6 +1194,14 @@ QString QWebSocketPrivate::createHandShakeRequest(QString resourceName,
         handshakeRequest << QStringLiteral("Sec-WebSocket-Extensions: ") % extensions;
     if (protocols.length() > 0)
         handshakeRequest << QStringLiteral("Sec-WebSocket-Protocol: ") % protocols;
+
+    for(int i = 0; i < m_additionalHeaders.size(); i++)
+    {
+        QString first = QString(m_additionalHeaders.at(i).first);
+        QString second = QString(m_additionalHeaders.at(i).second);
+        handshakeRequest << first % ": " % second;
+    }
+
     handshakeRequest << QStringLiteral("\r\n");
 
     return handshakeRequest.join(QStringLiteral("\r\n"));

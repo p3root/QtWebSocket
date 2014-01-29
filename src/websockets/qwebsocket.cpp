@@ -576,6 +576,30 @@ QString QWebSocket::closeReason() const
     return d->closeReason();
 }
 
+const QList<QPair<QString, QString> > &QWebSocket::additionalQueryString() const
+{
+    Q_D(const QWebSocket);
+    return d->addtionalQueryString();
+}
+
+const QList<QPair<QString, QString> > &QWebSocket::additionalHeaders() const
+{
+    Q_D(const QWebSocket);
+    return d->addtionalHeaders();
+}
+
+void QWebSocket::setAdditonalQueryString(QList<QPair<QString, QString> > lst)
+{
+    Q_D(QWebSocket);
+    d->setAdditionalQueryString(lst);
+}
+
+void QWebSocket::setAddtionalHeaders(QList<QPair<QString, QString> > lst)
+{
+    Q_D(QWebSocket);
+    d->setAdditionalHeaders(lst);
+}
+
 /*!
     \brief Returns the current state of the socket
  */
