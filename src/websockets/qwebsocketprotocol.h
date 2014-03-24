@@ -44,7 +44,7 @@
 
 #include <QtCore/qglobal.h>
 #if QT_VERSION >= QT_VERSION_CHECK(5, 0, 2)
-    #include "QtWebSockets/qwebsockets_global.h"
+    #include "qwebsockets_global.h"
 #else
     #include "qwebsockets_global.h"
 #endif

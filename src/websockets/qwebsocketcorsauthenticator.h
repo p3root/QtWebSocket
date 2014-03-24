@@ -42,11 +42,10 @@
 #define QWEBSOCKETCORSAUTHENTICATOR_H
 
 #include <QtCore/QScopedPointer>
-
+ #include "qwebsockets_global.h"
 #if QT_VERSION >= QT_VERSION_CHECK(5, 0, 2)
-    #include "QtWebSockets/qwebsockets_global.h"
+
 #else
-    #include "qwebsockets_global.h"
     #include "qwebsocket4.h"
 #endif
 

@@ -51,12 +51,12 @@
 #include <QtNetwork/QSslError>
 #endif
 
+#include "qwebsockets_global.h"
+#include "qwebsocketprotocol.h"
+
 #if QT_VERSION >= QT_VERSION_CHECK(5, 0, 2)
-    #include "QtWebSockets/qwebsockets_global.h"
-    #include "QtWebSockets/qwebsocketprotocol.h"
+
 #else
-    #include "qwebsockets_global.h"
-    #include "qwebsocketprotocol.h"
     #include "qwebsocket4.h"
     #include <QStringList>
 #endif

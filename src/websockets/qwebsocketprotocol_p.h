@@ -43,11 +43,7 @@
 #define QWEBSOCKETPROTOCOL_P_H
 
 #include <QtCore/qglobal.h>
-#if QT_VERSION >= QT_VERSION_CHECK(5, 0, 2)
-#include "QtWebSockets/qwebsocketprotocol.h"
-#else
 #include "qwebsocketprotocol.h"
-#endif
 
 QT_BEGIN_NAMESPACE
 

@@ -388,7 +388,7 @@ void QWebSocketPrivate::open(const QUrl &url, bool mask)
             QString first =  m_additionalQueryString.at(i).first;
             QString second =  m_additionalQueryString.at(i).second;
 
-            query += first +"="+second.toAscii()+"&";
+            query += first +"="+second.toHtmlEscaped()+"&";
         }
 
 #if QT_VERSION <= QT_VERSION_CHECK(5, 0, 2)
