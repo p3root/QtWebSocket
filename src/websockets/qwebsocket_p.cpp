@@ -492,7 +492,11 @@ void QWebSocketPrivate::ping(QByteArray payload)
     QByteArray pingFrame = getFrameHeader(QWebSocketProtocol::OC_PING, payload.size(),
                                           0 /*do not mask*/, true);
     pingFrame.append(payload);
-    (void)writeFrame(pingFrame);
+    qint64 written = writeFrame(pingFrame);
+    if(written != pingFrame.size())
+    {
+        //just ignore this case
+    }
 }
 
 /*!
