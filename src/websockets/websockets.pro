@@ -1,6 +1,7 @@
 TARGET = QtWebSockets
 
 QT += core network
+QT -= gui
 
 TEMPLATE = lib
 
