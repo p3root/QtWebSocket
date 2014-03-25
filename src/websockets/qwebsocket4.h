@@ -1,7 +1,7 @@
 #ifndef QWEBSOCKET_FOUR_H
 #define QWEBSOCKET_FOUR_H
 
-#if QT_VERSION <= QT_VERSION_CHECK(5, 0, 2)
+#if QT_VERSION <= QT_VERSION_CHECK(5, 2, 0)
 
     #include <stdlib.h>
     #include <QString>
@@ -9,8 +9,12 @@
     typedef size_t size_type;
     typedef qint32 qintptr;
 
-    #define QStringLiteral(str) QString::fromLocal8Bit(str)
-    #define QByteArrayLiteral(str) QByteArray(str)
+    #ifndef QStringLiteral
+        #define QStringLiteral(str) QString::fromLocal8Bit(str)
+    #endif
+    #ifndef QByteArrayLiteral
+        #define QByteArrayLiteral(str) QByteArray(str)
+    #endif
 
 #endif
 

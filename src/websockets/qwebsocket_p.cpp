@@ -215,7 +215,7 @@ qint64 QWebSocketPrivate::write(const char *message)
     if (!message || !*message)
         return qint64(0);
     uint size = qstrlen(message);
-#if QT_VERSION >= QT_VERSION_CHECK(5, 0, 2)
+#if QT_VERSION >= QT_VERSION_CHECK(5, 2, 0)
     qint64 maxSize = qMin(qint64(size), qint64(std::numeric_limits<QString::size_type>::max()));
 #else
     qint64 maxSize = qMin(qint64(size), qint64(std::numeric_limits<size_type>::max()));
@@ -230,7 +230,7 @@ qint64 QWebSocketPrivate::write(const char *message, qint64 maxSize)
 {
     if (!message || (maxSize <= qint64(0)) || !*message)
         return qint64(0);
-#if QT_VERSION >= QT_VERSION_CHECK(5, 0, 2)
+#if QT_VERSION >= QT_VERSION_CHECK(5, 2, 0)
     maxSize = qMin(maxSize, qint64(std::numeric_limits<QString::size_type>::max()));
 #else
     maxSize = qMin(maxSize, qint64(std::numeric_limits<size_type>::max()));

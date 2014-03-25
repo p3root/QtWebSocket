@@ -54,8 +54,8 @@
 #include "qwebsockets_global.h"
 #include "qwebsocketprotocol.h"
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 0, 2)
-
+#if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
+    #include <QStringList>
 #else
     #include "qwebsocket4.h"
     #include <QStringList>
