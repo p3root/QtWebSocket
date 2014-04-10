@@ -9,11 +9,13 @@ DEFINES += QTWEBSOCKETS_LIBRARY
 
 CONFIG += sharedlib
 
-HEADERS += \
-    $$PWD/qwebsocket4.h \
-    $$PWD/qwebsockets_global.h \
+PUBLIC_HEADERS += \
     $$PWD/qwebsocket.h \
     $$PWD/qwebsocketserver.h \
+    $$PWD/qwebsocket4.h \
+
+PRIVATE_HEADERS += \
+    $$PWD/qwebsockets_global.h \
     $$PWD/qwebsocketprotocol.h \
     $$PWD/qwebsocketcorsauthenticator.h \
     $$PWD/qwebsocket_p.h \
@@ -24,6 +26,9 @@ HEADERS += \
     $$PWD/qwebsocketdataprocessor_p.h \
     $$PWD/qwebsocketcorsauthenticator_p.h \
     $$PWD/qwebsocketframe_p.h
+
+HEADERS +=  $$PUBLIC_HEADERS \
+            $$PRIVATE_HEADERS
 
 SOURCES += \
     $$PWD/qwebsocket.cpp \
@@ -42,3 +47,7 @@ contains(QT_CONFIG, openssl) | contains(QT_CONFIG, openssl-linked) {
     HEADERS += $$PWD/qsslserver_p.h
 }
 
+target.path = $$[QT_INSTALL_PREFIX]/lib
+headers.files = $$PUBLIC_HEADERS
+headers.path = $$[QT_INSTALL_PREFIX]/include/QtWebSockets
+INSTALLS += target headers
