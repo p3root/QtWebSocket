@@ -421,6 +421,7 @@ void QWebSocketPrivate::open(const QUrl &url, bool mask)
                 Q_EMIT q->error(QAbstractSocket::UnsupportedSocketOperationError);
             } else {
                 QSslSocket *sslSocket = new QSslSocket(this);
+                connect(sslSocket, SIGNAL(sslErrors(QList<QSslError>)), this, SLOT(sslErrors(QList<QSslError>)));
                 m_pSocket.reset(sslSocket);
                 if (Q_LIKELY(m_pSocket)) {
                     m_pSocket->setSocketOption(QAbstractSocket::LowDelayOption, 1);
@@ -1126,6 +1127,19 @@ void QWebSocketPrivate::processStateChanged(QAbstractSocket::SocketState socketS
         default:
             break;
     }
+}
+
+void QWebSocketPrivate::sslErrors(const QList<QSslError> &er)
+{
+    QObject *sender = QObject::sender();
+
+    QSslSocket *sslSocket = reinterpret_cast<QSslSocket*>(sender);
+    Q_EMIT q_ptr->sslErrors(er);
+
+    if(m_configuration.m_ignoreSslErrors)
+        sslSocket->ignoreSslErrors();
+    else if(!m_configuration.m_ignoredSslErrors.empty())
+        sslSocket->ignoreSslErrors(m_configuration.m_ignoredSslErrors);
 }
 
 /*!
