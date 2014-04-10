@@ -171,7 +171,9 @@ private Q_SLOTS:
     void processHandshake(QTcpSocket *pSocket);
     void processStateChanged(QAbstractSocket::SocketState socketState);
 
+#ifndef QT_NO_SSL
     void sslErrors(const QList<QSslError> &errors);
+#endif
 
 private:
     QWebSocket * const q_ptr;

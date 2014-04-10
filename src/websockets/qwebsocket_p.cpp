@@ -1128,7 +1128,7 @@ void QWebSocketPrivate::processStateChanged(QAbstractSocket::SocketState socketS
             break;
     }
 }
-
+#ifndef QT_NO_SSL
 void QWebSocketPrivate::sslErrors(const QList<QSslError> &er)
 {
     QObject *sender = QObject::sender();
@@ -1141,7 +1141,7 @@ void QWebSocketPrivate::sslErrors(const QList<QSslError> &er)
     else if(!m_configuration.m_ignoredSslErrors.empty())
         sslSocket->ignoreSslErrors(m_configuration.m_ignoredSslErrors);
 }
-
+#endif
 /*!
  \internal
  */
